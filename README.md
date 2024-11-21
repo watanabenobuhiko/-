@@ -1,27 +1,33 @@
 ```mermaid
-graph TD
-    Start(["開始"])
-    A["Xは必修講義か"]
-    B["履修する"]
-    C["先輩に聞いてみる"]
-    D["先輩がやめとけと言ったか"]
-    E["履修しない"]
-    F["3回出席してみる"]
-    G["これダメだと思ったか"]
-    H["友達が3人履修しているか"]
-    End(["終了"])
+flowchart TD
+attend{A}
+goukei{E+R}
+tarinai{E+R}
+exam{E}
+pass[合格]
+fail[不合格]
+point{P}
 
-    Start --> A
-    A -->|はい| B
-    A -->|いいえ| C
-    C --> D
-    D -->|はい| E
-    D -->|いいえ| F
-    F --> G
-    G -->|はい| E
-    G -->|いいえ| H
-    H -->|はい| B
-    H -->|いいえ| E
-    B --> End
-    E --> End
+exam -->|≧60| pass
+exam -->|< 60| fail
+exam -->|≧45| pass
+exam -->|< 45| fail
+
+attend -->|< 10| fail
+attend -->|= 10~11| tarinai
+attend -->|< 12| fail
+attend -->|≧12| goukei
+attend -->|< 12| tarinai
+attend -->|≧ 12| point
+
+tarinai -->|< 80| fail
+tarinai -->|≧　80| pass
+
+goukei -->|≧ 60| pass
+goukei -->|< 60| exam
+
+point --> |≧ 45 | pass
+point --> |< 45 | fail
+
+
 ```
